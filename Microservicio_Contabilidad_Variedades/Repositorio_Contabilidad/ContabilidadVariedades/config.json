@@ -1,0 +1,7 @@
+{
+  "url-backend": "127.0.0.1",
+  "port": 5555,
+
+  "data-db-connection": "mongodb+srv://usuario-pruebas:mongo-12345@cluster0.4qipe2h.mongodb.net/bd-contabilidad-variedades?retryWrites=true&w=majority&appName=Cluster0",
+  "name-db": "bd-contabilidad-variedades"
+}
