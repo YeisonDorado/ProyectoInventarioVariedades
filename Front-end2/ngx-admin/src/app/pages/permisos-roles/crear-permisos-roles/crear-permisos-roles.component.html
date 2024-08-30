@@ -1,0 +1,52 @@
+<div class="col-lg-12">
+    <nb-card>
+      <nb-card-header *ngIf="modoCreacion">
+        ASIGNACION DE PERMISOS A ROL
+      </nb-card-header>
+      <nb-card-header *ngIf="!modoCreacion">
+        ACTUALIZACION DE PERMISOS A ROL
+      </nb-card-header>
+      <nb-card-body>
+        <br>
+        <div class="row">
+          <div class="col-3">
+            <label>Seleccione el ROL</label>
+          </div>
+          <div class="col-9">
+            <select class="form-control" [(ngModel)]="elPermisoRol.rol_id" required>
+              <option *ngFor="let rol of elRol" [value]="rol._id">{{rol.nombre }}</option>
+            </select>
+            <p *ngIf="intentoEnvio && !elPermisoRol.rol_id">Requerido</p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-3">
+            <label>Seleccione el nombre del permiso</label>
+          </div>
+          <div class="col-9">
+            <select class="form-control" [(ngModel)]="elPermisoRol.permiso_id" required>
+              <option *ngFor="let permiso of elPermiso" [value]="permiso._id">{{permiso.nombre}}</option>
+            </select>
+            <p *ngIf="intentoEnvio && !elPermisoRol.permiso_id">Requerido</p>
+          </div>
+        </div>
+      <br>
+        <div class="row">
+          <button *ngIf="modoCreacion" class="btn btn-primary btn-block" (click)="agregar()">
+            Crear
+          </button>
+          <button *ngIf="!modoCreacion" class="btn btn-primary btn-block" (click)="editar()">
+            Actualizar
+          </button>
+          <button class="btn btn-danger btn-block" [routerLink]="['/pages/permisos-roles/listar-permisos-roles']">
+            Cancelar
+          </button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  
+
+
+

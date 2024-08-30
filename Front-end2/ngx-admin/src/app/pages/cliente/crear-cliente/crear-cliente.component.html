@@ -1,0 +1,99 @@
+<div class="col-lg-12">
+    <nb-card>
+      <nb-card-header *ngIf="modoCreacion">
+        CREAR CLIENTE
+      </nb-card-header>
+      <nb-card-header *ngIf="!modoCreacion">
+        ACTUALIZAR CLIENTE
+      </nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col-3">
+            <label>Cedula/Nit</label>
+          </div>
+          <div class="col-9">
+            <input class="form-control" type="text" [disabled]="!modoCreacion" [(ngModel)]="elCliente.cedula_nit">
+            <p *ngIf="intentoEnvio && elCliente.cedula_nit">Requerido</p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-3">
+            <label>Nombre</label>
+          </div>
+          <div class="col-9">
+            <input class="form-control" type="text" [(ngModel)]="elCliente.nombre_completo">
+            <p *ngIf="intentoEnvio && elCliente.nombre_completo">Requerido</p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-3">
+            <label>Tipo de cliente</label>
+          </div>
+          <div class="col-9">
+            <select class="form-control" type="text" [(ngModel)]="elCliente.tipo">
+              <option value="Persona Natural">Persona Natural</option>
+              <option value="Persona Juridica">Persona Juridica</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+              <label>Direccion</label>
+            </div>
+            <div class="col-9">
+              <input class="form-control" type="text" [(ngModel)]="elCliente.direccion">
+              <p *ngIf="intentoEnvio && elCliente.direccion">Requerido</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+              <label>Ciudad</label>
+            </div>
+            <div class="col-9">
+              <input class="form-control" type="text" [(ngModel)]="elCliente.ciudad">
+              <p *ngIf="intentoEnvio && elCliente.ciudad">Requerido</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+              <label>Telefono</label>
+            </div>
+            <div class="col-9">
+              <input class="form-control" type="text" [(ngModel)]="elCliente.telefono">
+              <p *ngIf="intentoEnvio && elCliente.telefono">Requerido</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+              <label>Correo</label>
+            </div>
+            <div class="col-9">
+              <input class="form-control" type="email" [(ngModel)]="elCliente.correo">
+              <p *ngIf="intentoEnvio && elCliente.correo">Requerido</p>
+            </div>
+            <div *ngIf="intentoEnvio && elCliente.correo && !correoValido(elCliente.correo)">
+              <small class="text-danger">Debe ser un correo electrónico válido.</small>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+          <button *ngIf="modoCreacion" class="btn btn-primary btn-block" (click)="agregar()">
+            Crear
+          </button>
+          <button *ngIf="!modoCreacion" class="btn btn-primary btn-block" (click)="editar()">
+            Actualizar
+          </button>
+          <button class="btn btn-danger btn-block" [routerLink]="['/pages/cliente/listar-clientes']">
+            Cancelar
+          </button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  

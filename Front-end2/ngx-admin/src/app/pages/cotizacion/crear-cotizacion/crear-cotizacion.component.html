@@ -1,0 +1,135 @@
+<div class="col-lg-12">
+    <nb-card>
+      <nb-card-header *ngIf="modoCreacion" style="text-align: center;">
+        CREAR COTIZACION
+      </nb-card-header>
+      <nb-card-header *ngIf="!modoCreacion" style="text-align: center;">
+        ACTUALIZAR COTIZACION
+      </nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col-1">
+            <label>Numero</label>
+          </div>
+          <div class="col-4" style="margin-right: 200px;">
+            <input class="form-control" type="text" [disabled]="true"  [(ngModel)]="laCotizacion.cot_numero">
+            <p *ngIf="intentoEnvio && !laCotizacion.cot_numero">Requerido</p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-1">
+            <label>Fecha</label>
+          </div>
+          <div class="col-4">
+            <input class="form-control" type="date" [(ngModel)]="laCotizacion.cot_fecha">
+            <p *ngIf="intentoEnvio && !laCotizacion.cot_fecha">Requerido</p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-1">
+            <label>Forma/pago</label>
+          </div>
+          <div class="col-4" style="margin-right: 200px;">
+            <select class="form-control" type="text" [(ngModel)]="laCotizacion.cot_forma_pago">
+              <option value="Efectivo">Efectivo</option>
+              <option value="Transferencia">Transferencia</option>
+              <option value="Tarjeta debito/credito">Tarjeta debito/credito</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-1">
+            <label>Cliente</label>
+          </div>
+          <div class="col-4">
+            <select class="form-control" [(ngModel)]="laCotizacion.cliente_id" required>
+              <option *ngFor="let cliente of elCliente" [value]="cliente._id">{{ cliente.nombre_completo }}</option>
+            </select>
+          <p *ngIf="intentoEnvio && !laCotizacion.cliente_id">Requerido</p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-1">
+            <label>Producto</label>
+          </div>
+          <div class="col-4">
+            <input type="text" class="form-control" placeholder="Buscar producto" [(ngModel)]="searchTerm">
+            <select class="form-control" [(ngModel)]="selectedProductoId" (ngModelChange)="seleccionarProducto($event)">
+              <option *ngFor="let producto of filtrarProductos()" [ngValue]="producto.prod_codigo">{{ producto.prod_nombre }}</option>
+            </select>
+          </div>
+        </div>
+        
+        <br>
+        <div class="row">
+          <div class="col-1">
+            <label>Cantidad</label>
+          </div>
+          <div class="col-4">
+            <input class="form-control" type="number" [(ngModel)]="cantidadSeleccionada">
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <button type="button" class="btn btn-success" (click)="agregarProducto()">
+            Agregar Producto
+          </button>
+        </div>
+        <br>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Cod Producto</th>
+              <th>Nombre Producto</th>
+              <th>Marca</th>
+              <th>Precio venta</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of laCotizacion.productos">
+              <td>{{ item.prod_codigo }}</td>
+              <td>{{ item.prod_nombre }}</td>
+              <td>{{ item.prod_marca }}</td>
+              <td>{{ item.prod_precio_venta }}</td>
+              <td>{{ item.cot_cantidad_venta_prod }}</td>
+              <td>{{ item.cot_valor_total_prod }}</td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="eliminarProducto(item)">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <div class="row">
+          <div class="col-1" style="margin-left: 650px;">
+            <label>Total</label>
+          </div>
+          <div class="col-4">
+            <input class="form-control" type="text" [value]="laCotizacion.cot_total_pago" readonly>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <button *ngIf="modoCreacion" class="btn btn-primary btn-block" (click)="agregar()">
+            Crear
+          </button>
+          <button *ngIf="!modoCreacion" class="btn btn-primary btn-block" (click)="editar()">
+            Actualizar
+          </button>
+          <button class="btn btn-danger btn-block" [routerLink]="['/pages/cotizacion/listar-cotizaciones']">
+            Cancelar
+          </button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  

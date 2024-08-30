@@ -1,0 +1,82 @@
+<div class="col-lg-12">
+    <nb-card>
+      <nb-card-header *ngIf="modoCreacion">
+        REGISTRAR EGRESO
+      </nb-card-header>
+      <nb-card-header *ngIf="!modoCreacion">
+        ACTUALIZAR EGRESO
+      </nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col-3">
+            <label>Codigo</label>
+          </div>
+          <div class="col-9">
+            <input class="form-control" type="text" [disabled]="true" [(ngModel)]="elEgreso.egreso_codigo">
+            <p *ngIf="intentoEnvio && elEgreso.egreso_codigo">Requerido</p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-3">
+            <label>Fecha</label>
+          </div>
+          <div class="col-9">
+            <input class="form-control" type="date" [(ngModel)]="elEgreso.egreso_fecha">
+            <p *ngIf="intentoEnvio && elEgreso.egreso_fecha">Requerido</p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+              <label>Monto</label>
+            </div>
+            <div class="col-9">
+              <input class="form-control" type="number" [(ngModel)]="elEgreso.egreso_monto">
+              <p *ngIf="intentoEnvio && elEgreso.egreso_monto">Requerido</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+              <label>Descripcion</label>
+            </div>
+            <div class="col-9">
+              <input class="form-control" type="text" [(ngModel)]="elEgreso.egreso_descripcion">
+              <p *ngIf="intentoEnvio && elEgreso.egreso_descripcion">Requerido</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-3">
+            <label>Categoria</label>
+          </div>
+          <div class="col-9">
+            <select class="form-control" [(ngModel)]="elEgreso.categoria_id" required>
+              <option *ngFor="let categoria of laCategoria" [value]="categoria._id">{{ categoria.cat_nombre }}</option>
+            </select>
+            <p *ngIf="intentoEnvio && !elEgreso.categoria_id">Requerido</p>
+          </div>
+          
+      </div>
+     
+      <br>
+        <div class="row">
+          <button *ngIf="modoCreacion" class="btn btn-primary btn-block" (click)="agregar()">
+            Crear
+          </button>
+          <button *ngIf="!modoCreacion" class="btn btn-primary btn-block" (click)="editar()">
+            Actualizar
+          </button>
+          <button class="btn btn-danger btn-block" [routerLink]="['/pages/egreso/listar-egresos']">
+            Cancelar
+          </button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  
+
+
+
+

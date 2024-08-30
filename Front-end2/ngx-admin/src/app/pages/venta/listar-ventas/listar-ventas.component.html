@@ -1,0 +1,42 @@
+<div class="col-lg-12">
+    <nb-card>
+        <nb-card-header>
+            ADMINISTRACIÓN DE COMPROBANTES DE VENTA 
+            <button type="button" class="btn btn-success" (click)="agregar()">
+                <i class="fas fa-plus"></i>
+            </button>
+        </nb-card-header>
+        <table class="table">
+            <tr>
+                <th *ngFor="let columaActual of nombresColumnas">{{columaActual}}</th>
+            </tr>
+            <ng-container *ngFor="let ventaActual of ventas">
+                <tr>
+                    <td>{{ventaActual.comp_numero}}</td>
+                    <td>{{ventaActual.comp_fecha}}</td>
+                    <td *ngIf="ventaActual.cliente">{{ventaActual.cliente.nombre_completo}}</td>
+                    <td *ngIf="!ventaActual.cliente">Cliente no encontrado</td>
+
+                    <td>{{ventaActual.comp_forma_pago}}</td>
+                    <td>{{ventaActual.comp_total_pago}}</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-primary" (click)="editar(ventaActual._id)">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger" (click)="eliminar(ventaActual._id)">
+                            <i class="fas fa-solid fa-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-info" (click)="generarPDF(ventaActual)">
+                            <i class="fas fa-file-pdf"></i>
+                        </button>
+                        <button type="button" class="btn btn-success" (click)="registrarIngreso(ventaActual)">
+                            <i class="fas fa-dollar-sign"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-container>
+        </table>
+    </nb-card>
+</div>
+

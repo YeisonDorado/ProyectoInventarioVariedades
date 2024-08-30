@@ -1,0 +1,50 @@
+<!-- componentes/dashboard/dashboard.component.html -->
+<div class="dashboard">
+  <h3>Visualización de totales de ventas y egresos</h3>
+    <div class="totals">
+      <div class="card" style="background-color: chartreuse;">
+        <h3>Ventas Dia</h3>
+        <p>{{ ventasDiarias | currency }}</p>
+      </div>
+      <div class="card" style="background-color:tomato">
+        <h3>Egresos Dia</h3>
+        <p>{{ egresosDiarios | currency }}</p>
+      </div>
+      <div class="card" style="background-color: chartreuse">
+        <h3>Ventas Mes</h3>
+        <p>{{ ventasMensuales | currency }}</p>
+      </div>
+      <div class="card" style="background-color: tomato">
+        <h3>Egresos Mes</h3>
+        <p>{{ egresosMensuales | currency }}</p>
+      </div>
+      <div class="card" style="background-color: orange;">
+        <h3>Saldo Mensual</h3>
+        <p>{{ saldoMensual | currency }}</p>
+      </div>
+    </div>
+    <h3>Grafica ingresos vs egresos</h3>
+    <div class="chart">
+      <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+      </canvas>
+    </div>
+    <label for="month">Seleccionar Mes:</label>
+    <select id="month" [(ngModel)]="selectedMonth" name="month" class="form-control">
+      <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+    </select>
+  
+    <label for="year">Seleccionar Año:</label>
+    <select id="year" [(ngModel)]="selectedYear" name="year" class="form-control">
+      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+
+
+
+    <button class="btn btn-danger" (click)="generarReporte()">Generar Reporte De Ventas PDF</button>
+  </div>
+  

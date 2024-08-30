@@ -1,0 +1,40 @@
+<div class="col-lg-12">
+    <nb-card>
+        <nb-card-header>
+            ADMINISTRACIÓN DE COTIZACIONES 
+            <button type="button" class="btn btn-success" (click)="agregar()">
+                <i class="fas fa-plus"></i>
+            </button>
+        </nb-card-header>
+        <table class="table">
+            <tr>
+                <th *ngFor="let columaActual of nombresColumnas">{{columaActual}}</th>
+            </tr>
+            <ng-container *ngFor="let cotizacionActual of cotizaciones">
+                <tr>
+                    <td>{{cotizacionActual.cot_numero}}</td>
+                    <td>{{cotizacionActual.cot_fecha}}</td>
+                    <td *ngIf="cotizacionActual.cliente">{{cotizacionActual.cliente.nombre_completo}}</td>
+                    <td *ngIf="!cotizacionActual.cliente">Cliente no encontrado</td>
+
+                    <td>{{cotizacionActual.cot_forma_pago}}</td>
+                    <td>{{cotizacionActual.cot_total_pago}}</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-primary" (click)="editar(cotizacionActual._id)">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger" (click)="eliminar(cotizacionActual._id)">
+                            <i class="fas fa-solid fa-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-info" (click)="generarPDF(cotizacionActual)">
+                            <i class="fas fa-file-pdf"></i>
+                        </button>
+                        
+                    </td>
+                </tr>
+            </ng-container>
+        </table>
+    </nb-card>
+</div>
+

@@ -1,0 +1,94 @@
+<div class="col-lg-12">
+    <nb-card>
+      <nb-card-header *ngIf="modoCreacion">
+        REGISTRAR INGRESO
+      </nb-card-header>
+      <nb-card-header *ngIf="!modoCreacion">
+        ACTUALIZAR INGRESO
+      </nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col-3">
+            <label>Codigo</label>
+          </div>
+          <div class="col-9">
+            <input class="form-control" type="text" [disabled]="true"  [(ngModel)]="elIngreso.ing_codigo">
+            <p *ngIf="intentoEnvio && elIngreso.ing_codigo">Requerido</p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-3">
+            <label>Fecha</label>
+          </div>
+          <div class="col-9">
+            <input class="form-control" type="date"  [(ngModel)]="elIngreso.ing_fecha">
+            <p *ngIf="intentoEnvio && elIngreso.ing_fecha">Requerido</p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+              <label>Monto</label>
+            </div>
+            <div class="col-9">
+              <input class="form-control" type="number" [(ngModel)]="elIngreso.ing_monto">
+              <p *ngIf="intentoEnvio && elIngreso.ing_monto">Requerido</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+              <label>Descripcion</label>
+            </div>
+            <div class="col-9">
+              <input class="form-control" type="text" [(ngModel)]="elIngreso.ing_descripcion">
+              <p *ngIf="intentoEnvio && elIngreso.ing_descripcion">Requerido</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+              <label>Metodo pago</label>
+            </div>
+            <div class="col-9">
+              <select class="form-control" type="text" [(ngModel)]="elIngreso.ing_metodo_pago">
+                <option value="Efectivo">Efectivo</option>
+                <option value="Transferencia">Transferencia</option>
+                <option value="Tarjeta debito/credito">Tarjeta debito/credito</option>
+              </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-3">
+            <label>Categoria</label>
+          </div>
+          <div class="col-9">
+            <select class="form-control" [(ngModel)]="elIngreso.categoria_id" required>
+              <option *ngFor="let categoria of laCategoria" [value]="categoria._id">{{ categoria.cat_nombre }}</option>
+            </select>
+            <p *ngIf="intentoEnvio && !elIngreso.categoria_id">Requerido</p>
+          </div>
+          
+      </div>
+     
+      <br>
+        <div class="row">
+          <button *ngIf="modoCreacion" class="btn btn-primary btn-block" (click)="agregar()">
+            Crear
+          </button>
+          <button *ngIf="!modoCreacion" class="btn btn-primary btn-block" (click)="editar()">
+            Actualizar
+          </button>
+          <button class="btn btn-danger btn-block" [routerLink]="['/pages/ingreso/listar-ingresos']">
+            Cancelar
+          </button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  
+
+
+
